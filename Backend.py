@@ -3,6 +3,7 @@ config = {}
 with open("config.py") as f:
     code = compile(f.read(), "config.py", 'exec')
     exec(code, config)
+f.close()
 result_count = 0
 latitude = 43.4643#42.3#18.563747#51.474144#49.28402 ##51.474144  # geographical centre of search
 longitude = -80.5204#-83#-72.142439#-0.035401#-123.11765 ##-0.035401  # geographical centre of search
@@ -19,6 +20,8 @@ twitter = Twitter(auth=OAuth(config["access_key"], config["access_secret"], conf
 #     print(result["text"])
 user = "POTUS"
 results = twitter.statuses.user_timeline(screen_name = user)
+print(results)
+print()
 for status in results:
     print(status)
     print ("(%s) %s" % (status["created_at"], status["text"].encode("ascii", "ignore")))

@@ -1,9 +1,9 @@
 import indicoio
-import config
-import pyrebase
-import warnings
-
-key = config.indico_key
+config = {}
+with open("config.py") as f:
+    code = compile(f.read(), "config.py", 'exec')
+    exec(code, config)
+f.close()
 class UserData:
     def __init__(self):
         self.opinionString = ""
@@ -40,51 +40,23 @@ class UserData:
     # Requires: Request is anyof(mood, party)
     def askInfo(self, request):
         if request == "mood":
-            tempDict = indicoio.emotion(self.opinionString, api_key=key)
+            tempDict = indicoio.emotion(self.opinionString, api_key=config["indico_key"])
             maxVal = max(tempDict.values())
             for i in tempDict:
                 if tempDict[i] == maxVal:
                     return i
         elif request == "party":
-            tempDict = indicoio.political(self.opinionString, api_key=key)
+            tempDict = indicoio.political(self.opinionString, api_key=config["indico_key"])
             maxVal = max(tempDict.values())
             for i in tempDict:
                 if tempDict[i] == maxVal:
                     return i
         else:
-            warnings.warn("invalid request",UserWarning)
+            raise Exception
 
-    """
-    # addToDB takes a UserData and a pyrebase db and mutates the database in order to add UserData to the db.
-    # addToDB: UserData Pyrebase -> None
-    # Effects: Pyrebase is mutated to include self
-    def addToDB(self, db):
-
-    """
-
-    """
-    # compareWithParty takes a UserData and a pyrebase db and returns a string that discusses how that user's emotions
-    #   correspond with the average emotion of their political party.
-    # compareWithParty: UserData Pyrebase -> Str
-    def compareWithParty(self, db):
-
-    """
-
-    """
-    # deleteFromDB takes a UserData and a pyrebase db and mutates db to remove UserData from it.
-    # deleteFromDB: UserData Pyrebase -> None
-    # Effects: Mutates db so that UserData is removed.
-    def deleteFromDB(self, db):
-
-    """
 
 
 #Tests
-# Check values for random string
-# Expected end output:
-# Opinion: I have an opinion about stuff
-# Party: Green
-# Moon: anger
 basicTest1 = UserData()
 print(basicTest1)
 basicTest1.updateOpinion("I have an opinion")
@@ -95,12 +67,3 @@ basicTest1.updateMood(basicTest1.askInfo("mood"))
 print(basicTest1)
 basicTest1.updateParty(basicTest1.askInfo("party"))
 print(basicTest1)
-
-# Database test
-dbtest1 = UserData()
-dbtest1.updateOpinion("This db is gonna be great great great, it's gonna be HUGE.")
-dbtest1.updateMood(dbtest1.askInfo("mood"))
-dbtest1.updateParty(dbtest1.askInfo("party"))
-# activate once db functions work
-#dbtest1.addToDB()
-#dbtest1.deleteFromDB()
