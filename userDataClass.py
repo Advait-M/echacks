@@ -2,7 +2,7 @@ import indicoio
 import warnings
 import pyredb as pydb
 import Backend as twitData
-
+import math
 
 class UserData:
     """
@@ -101,31 +101,40 @@ class UserData:
     # Effects: Pyrebase is mutated to include self
     def addToDB(self):
         firedb.addUser(self.twitterHandle, self.realName, self.askInfo("mood", "dictionary"),
-                     self.askInfo("party", "dictionary"))
+                    self.askInfo("party", "dictionary"))
 
-    # compareWithParty takes a UserData and a pyrebase db and returns a string that discusses how that user's emotions
-    #   correspond with the average emotion of their political party.
+    # compareWithParty takes a UserData and returns a number that discusses how that user's emotions
+    #   correspond with the average emotion of their political party in the form of error from these emotions.
     # compareWithParty: UserData Pyrebase -> Str
     def compareWithParty(self):
         usersList = firedb.getAll()
         emotionsList = ["anger", "joy", "sadness", "surprise", "fear"]
         partiesList = ["Green", "Liberal", "Conservative", "Libertarian"]
         emotionsOfUserParty = [0, 0, 0, 0, 0]
+        partyCount = 0
 
         for i in usersList:
             tempParty = [i["Green"],i["Liberal"],i["Conservative"],i["Libertarian"]]
             probableParty = tempParty.index(max(tempParty))
             if probableParty == self.politicalParty:
                 tempEmotion = [i["anger"], i["joy"], i["sadness"], i["surprise"], i["fear"]]
-                probableEmotion = emotionsList.index(max(tempEmotion))
-                emotionsOfUserParty[probableEmotion] += 1
+                for i in range(0,len(tempEmotion)):
+                    emotionsOfUserParty[i] += tempEmotion[i]
+                partyCount += 1
 
-        partyEmotion = emotionsList[emotionsOfUserParty.index(max(emotionsOfUserParty))]
+        if partyCount == 0:
+            return 0
+        for i in range(0, len(emotionsOfUserParty)):
+            emotionsOfUserParty[i] = emotionsOfUserParty[i]/partyCount
 
-        if partyEmotion == self.mood:
-            return ["Aligned mood", self.politicalParty, partyEmotion, self.mood]
-        else:
-            return ["Non-Aligned mood", self.politicalParty, partyEmotion, self.mood]
+        error = 0
+        userD = self.askInfo("mood", "dictionary")
+        userMood = [userD["anger"], userD["joy"], userD["sadness"], userD["surprise"], userD["fear"]]
+        for i in range(0,len(emotionsOfUserParty)):
+            tempError = math.sqrt(math.pow(userMood[i]-emotionsOfUserParty[i], 2))
+            error += tempError
+
+        return error
 
 
         """
