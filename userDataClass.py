@@ -1,13 +1,6 @@
 import indicoio
 import warnings
 
-# get api keys securely
-config = {}
-with open("config.py") as f:
-    code = compile(f.read(), "config.py", 'exec')
-    exec(code, config)
-f.close()
-
 class UserData:
     def __init__(self):
         self.opinionString = ""
@@ -82,17 +75,23 @@ class UserData:
 
         """
 
-#Tests
-basicTest1 = UserData()
-print(basicTest1)
-basicTest1.updateOpinion("I have an opinion")
-print(basicTest1)
-basicTest1.updateOpinion("about stuff")
-print(basicTest1)
-basicTest1.updateMood(basicTest1.askInfo("mood"))
-print(basicTest1)
-basicTest1.updateParty(basicTest1.askInfo("party"))
-print(basicTest1)
+if __name__ == "__main__":
+    #Tests
+    # get api keys securely
+    config = {}
+    with open("config.py") as f:
+        code = compile(f.read(), "config.py", 'exec')
+        exec(code, config)
+    f.close()
 
-
+    basicTest1 = UserData()
+    print(basicTest1)
+    basicTest1.updateOpinion("I have an opinion")
+    print(basicTest1)
+    basicTest1.updateOpinion("about stuff")
+    print(basicTest1)
+    basicTest1.updateMood(basicTest1.askInfo("mood"))
+    print(basicTest1)
+    basicTest1.updateParty(basicTest1.askInfo("party"))
+    print(basicTest1)
 
