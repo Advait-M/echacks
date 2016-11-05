@@ -4,12 +4,16 @@ import pyredb as pydb
 
 class UserData:
     def __init__(self):
+        self.realName = ""
+        self.twitterHandle = ""
         self.opinionString = ""
         self.politicalParty = ""
         self.mood = ""
 
     def __str__(self):
-        return "Opinion: " + self.opinionString +"\nParty: "+self.politicalParty+"\nMood: "+self.mood
+        return "Real Name: " + self.realName + "\nTwitter Handle: "+ self.twitterHandle + "\nOpinion: " + \
+               self.opinionString +"\nParty: "+self.politicalParty+"\nMood: "+self.mood
+
 
     # updateOpinion takes self and a string called opiString and mutates self so that
     #   the string that is sent to indico is updated with the latest tweet
