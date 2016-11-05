@@ -11,8 +11,14 @@ max_range = radius # search range in kilometres
 num_results = 1 # minimum results to obtain
 last_id = None
 twitter = Twitter(auth=OAuth(config["access_key"], config["access_secret"], config["consumer_key"], config["consumer_secret"]))
-query = twitter.search.tweets(q="", geocode="%f,%f,%dkm" % (latitude, longitude, max_range), count=100,
-                                  max_id=last_id, until="2016-11-4")
+# results = twitter.users.search(q = '"POTUS"')
+# query = twitter.search.tweets(q="", geocode="%f,%f,%dkm" % (latitude, longitude, max_range), count=100, max_id=last_id, until="2016-11-4")
 # print(query)
-for result in query["statuses"]:
-    print(result["text"])
+# print(query)
+# for result in query["statuses"]:
+#     print(result["text"])
+user = "POTUS"
+results = twitter.statuses.user_timeline(screen_name = user)
+for status in results:
+    print(status)
+    print ("(%s) %s" % (status["created_at"], status["text"].encode("ascii", "ignore")))
