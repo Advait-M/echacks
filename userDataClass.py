@@ -76,13 +76,12 @@ class UserData:
         else:
             warnings.warn("invalid request", UserWarning)
 
-        """
     # addToDB takes a UserData and a pyrebase db and mutates the database in order to add UserData to the db.
     # addToDB: UserData Pyrebase -> None
     # Effects: Pyrebase is mutated to include self
-    def addToDB(self, db):
-        pydb.addUser(self.twitterHandle, self.realName, )
-        """
+    def addToDB(self):
+        pydb.addUser(self.twitterHandle, self.realName, self.askInfo("mood", "dictionary"),\
+                     self.askInfo("party", "dictionary"))
 
         """
         # compareWithParty takes a UserData and a pyrebase db and returns a string that discusses how that user's emotions
