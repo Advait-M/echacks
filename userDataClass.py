@@ -51,30 +51,37 @@ class UserData:
 
     # askInfo takes a UserData and a string called request and returns a string corresponding to
     #   the appropriate data given self.opinionString and request.
-    # askInfo: UserData Str -> Str
+    # askInfo: UserData Str Str -> Str
     # Requires: Request is anyof(mood, party)
-    def askInfo(self, request):
+    #           dictOrString is anyof(dictionary string)
+    def askInfo(self, request, dictOrString):
         if request == "mood":
             tempDict = indicoio.emotion(self.opinionString, api_key=config["indico_key"])
-            maxVal = max(tempDict.values())
-            for i in tempDict:
-                if tempDict[i] == maxVal:
-                    return i
+            if dictOrString == "dictionary":
+                return tempDict
+            else:
+                maxVal = max(tempDict.values())
+                for i in tempDict:
+                    if tempDict[i] == maxVal:
+                        return i
         elif request == "party":
             tempDict = indicoio.political(self.opinionString, api_key=config["indico_key"])
-            maxVal = max(tempDict.values())
-            for i in tempDict:
-                if tempDict[i] == maxVal:
-                    return i
+            if dictOrString == "dictionary":
+                return tempDict
+            else:
+                maxVal = max(tempDict.values())
+                for i in tempDict:
+                    if tempDict[i] == maxVal:
+                        return i
         else:
             warnings.warn("invalid request", UserWarning)
 
         """
-        # addToDB takes a UserData and a pyrebase db and mutates the database in order to add UserData to the db.
-        # addToDB: UserData Pyrebase -> None
-        # Effects: Pyrebase is mutated to include self
-        def addToDB(self, db):
-
+    # addToDB takes a UserData and a pyrebase db and mutates the database in order to add UserData to the db.
+    # addToDB: UserData Pyrebase -> None
+    # Effects: Pyrebase is mutated to include self
+    def addToDB(self, db):
+        pydb.addUser(self.twitterHandle, self.realName, )
         """
 
         """
