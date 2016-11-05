@@ -2,7 +2,7 @@ import indicoio
 import config
 
 key = config.indico_key
-def UserData():
+class UserData:
     def __init__(self):
         self.opinionString = ""
         self.politicalParty = ""
@@ -16,7 +16,7 @@ def UserData():
     # updateMood: UserDate Str -> None
     # Effects: Mutates self
     def updateOpinion(self, opiString):
-        self.opinionString.append(" " + opiString)
+        self.opinionString += (" " + opiString)
 
     # updateParty takes self and a string called inParty and mutates the party
     #   element of self to inParty, which is received from indico.
@@ -44,3 +44,13 @@ def UserData():
         else:
             raise Exception
 
+
+
+#Tests
+basicTest1 = UserData()
+print(basicTest1)
+basicTest1.updateOpinion("I have an opinion")
+print(basicTest1)
+basicTest1.updateOpinion("about stuff")
+print(basicTest1)
+basicTest1.update("mood")
