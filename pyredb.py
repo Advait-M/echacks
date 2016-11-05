@@ -9,7 +9,9 @@ class LogiticaPolitica:
         self.firebase = initialize_app(self.config)
         self.db = self.firebase.database()
 
-
+    # start takes a LogiticaPolitical and starts a db stream to dynamically change and access the database.
+    # start: LogiticaPolitica -> None
+    # Effects: stream started with db to access and edit.
     def start(self):
         self.stream = self.db.stream(self.streamHandler)
 
@@ -27,6 +29,9 @@ class LogiticaPolitica:
         dataDict["name"] = uName
         self.db.child(handle).set(dataDict)
 
+    # getAll takes a pyredb and returns a dictionary containing values for each correlation between political parties
+    #   and emotion for each entry in the database.
+    # getAll: pyredb -> Dict
     def getAll(self):
         all_users = self.db.child("/").get()
         masterList = []
