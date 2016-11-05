@@ -1,3 +1,7 @@
+import indicoio
+import config
+
+key = config.indico_key
 def UserData():
     def __init__(self):
         self.opinionString = ""
@@ -27,3 +31,16 @@ def UserData():
     # Effects: Mutates self
     def updateMood(self, inMood):
         self.mood = inMood
+
+    # askPart takes a UserData and a string called request and returns a string corresponding to
+    #   the appropriate data given self.opinionString and request.
+    # askParty: UserData Str -> Str
+    # Requires: Request is anyof(mood, party)
+    def askParty(self, request):
+        if request == "mood":
+            indicoio.sentiment(self.opinionString, api_key=key)
+        elif request == "party":
+            indicoio.political(self.opinionString, api_key=key)
+        else:
+            raise
+
