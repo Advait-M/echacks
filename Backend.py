@@ -19,6 +19,8 @@ twitter = Twitter(auth=OAuth(config["access_key"], config["access_secret"], conf
 #     print(result["text"])
 user = "POTUS"
 results = twitter.statuses.user_timeline(screen_name = user)
+print(results)
+print()
 for status in results:
     print(status)
     print ("(%s) %s" % (status["created_at"], status["text"].encode("ascii", "ignore")))

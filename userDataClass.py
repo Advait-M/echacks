@@ -1,7 +1,8 @@
 import indicoio
-import config
-
-key = config.indico_key
+config = {}
+with open("config.py") as f:
+    code = compile(f.read(), "config.py", 'exec')
+    exec(code, config)
 class UserData:
     def __init__(self):
         self.opinionString = ""
@@ -38,13 +39,13 @@ class UserData:
     # Requires: Request is anyof(mood, party)
     def askInfo(self, request):
         if request == "mood":
-            tempDict = indicoio.emotion(self.opinionString, api_key=key)
+            tempDict = indicoio.emotion(self.opinionString, api_key=config["indico_key"])
             maxVal = max(tempDict.values())
             for i in tempDict:
                 if tempDict[i] == maxVal:
                     return i
         elif request == "party":
-            tempDict = indicoio.political(self.opinionString, api_key=key)
+            tempDict = indicoio.political(self.opinionString, api_key=config["indico_key"])
             maxVal = max(tempDict.values())
             for i in tempDict:
                 if tempDict[i] == maxVal:
