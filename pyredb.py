@@ -44,7 +44,7 @@ class LogiticaPolitica:
             mDict["sadness"] = (user.val())["sadness"]
             mDict["name"] = (user.val())["name"]
             masterList.append(mDict)
-        print(masterList)
+        #print(masterList)
         return masterList
 
 if __name__ == "__main__":
