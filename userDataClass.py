@@ -9,7 +9,7 @@ class UserData:
         self.mood = ""
 
     def __str__(self):
-        return "Opinion: " + self.opinionString +"\nParty:"+self.politicalParty+"\nMood: "+self.mood
+        return "Opinion: " + self.opinionString +"\nParty: "+self.politicalParty+"\nMood: "+self.mood
 
     # updateOpinion takes self and a string called opiString and mutates self so that
     #   the string that is sent to indico is updated with the latest tweet
@@ -38,9 +38,17 @@ class UserData:
     # Requires: Request is anyof(mood, party)
     def askInfo(self, request):
         if request == "mood":
-            indicoio.emotion(self.opinionString, api_key=key)
+            tempDict = indicoio.emotion(self.opinionString, api_key=key)
+            maxVal = max(tempDict.values())
+            for i in tempDict:
+                if tempDict[i] == maxVal:
+                    return i
         elif request == "party":
-            indicoio.political(self.opinionString, api_key=key)
+            tempDict = indicoio.political(self.opinionString, api_key=key)
+            maxVal = max(tempDict.values())
+            for i in tempDict:
+                if tempDict[i] == maxVal:
+                    return i
         else:
             raise Exception
 
@@ -55,5 +63,5 @@ basicTest1.updateOpinion("about stuff")
 print(basicTest1)
 basicTest1.updateMood(basicTest1.askInfo("mood"))
 print(basicTest1)
-basicTest1.updateMood(basicTest1.askInfo("party"))
+basicTest1.updateParty(basicTest1.askInfo("party"))
 print(basicTest1)
