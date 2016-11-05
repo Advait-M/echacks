@@ -6,10 +6,9 @@ import config as cf
 class WaitNoMore:
     def __init__(self):
         self.config = cf.firebaseStuff
-
         self.firebase = initialize_app(self.config)
-
         self.db = self.firebase.database()
+
 
     def start(self):
         self.stream = self.db.stream(self.streamHandler)
@@ -25,4 +24,6 @@ class WaitNoMore:
 
 
 if __name__ == "__main__":
-    WaitNoMore().start()
+    test = WaitNoMore()
+    test.start()
+    print("a")
