@@ -173,6 +173,8 @@ if __name__ == "__main__":
         exec(code, config)
     f.close()
     firedb = pydb.LogiticaPolitica()
+
+    # Test each individual operation.
     """
     basicTest1 = UserData()
     # print(basicTest1)
@@ -197,7 +199,7 @@ if __name__ == "__main__":
     print(basicTest1.compareWithParty())
     """
 
-    #Populate the database
+    #Populate the database and test serial tweets
     # CHANGE THIS TO ONE WHEN THE DB IS POPULATED
     on = 1
     politicallyActiveHandles = [
