@@ -6,6 +6,8 @@ import math
 
 class UserData:
     """
+    UserData is a class that contains details of a twitter user that would be relevant to performing a correlation
+        of their political leanings (based on tweets) and their conveyed emotion (also based on tweets).
     Fields:
         (can be added with parameter updaters)
         realName: String
@@ -200,7 +202,7 @@ if __name__ == "__main__":
     """
 
     #Populate the database and test serial tweets
-    # CHANGE THIS TO ONE WHEN THE DB IS POPULATED
+    # CHANGE THIS TO 1 WHEN THE DB IS POPULATED
     on = 1
     politicallyActiveHandles = [
         "RepublicanStudy",
