@@ -42,5 +42,5 @@ def UserData():
         elif request == "party":
             indicoio.political(self.opinionString, api_key=key)
         else:
-            raise Warning
+            raise Exception
 
