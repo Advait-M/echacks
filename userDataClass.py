@@ -2,7 +2,19 @@ import indicoio
 import warnings
 import pyredb as pydb
 
+
 class UserData:
+    """
+    Fields:
+        (can be added with parameter updaters)
+        realName: String
+        twitterHandle: String
+        opinionString: String
+        politicalParty: String
+        Mood: String
+
+
+    """
     def __init__(self):
         self.realName = ""
         self.twitterHandle = ""
@@ -14,6 +26,8 @@ class UserData:
         return "Real Name: " + self.realName + "\nTwitter Handle: "+ self.twitterHandle + "\nOpinion: " + \
                self.opinionString +"\nParty: "+self.politicalParty+"\nMood: "+self.mood
 
+    # Parameter updaters
+    # ------------------------------------------------------------------------------------------------------------------
     # updateRealName takes self and a string called inName and mutates self to make the user's
     #   real name be the inputted string.
     # updateRealName: UserData Str -> None
@@ -48,10 +62,13 @@ class UserData:
     # Effects: Mutates self
     def updateMood(self, inMood):
         self.mood = inMood
+    #------------------------------------------------------------------------------------------------------------------
+    #End of Parameter Updaters
+
 
     # askInfo takes a UserData and a string called request and returns a string corresponding to
     #   the appropriate data given self.opinionString and request.
-    # askInfo: UserData Str Str -> Str
+    # askInfo: UserData Str Str -> anyof(Str Dict)
     # Requires: Request is anyof(mood, party)
     #           dictOrString is anyof(dictionary string)
     def askInfo(self, request, dictOrString):
@@ -76,6 +93,8 @@ class UserData:
         else:
             warnings.warn("invalid request", UserWarning)
 
+    # Database Operations
+    # ------------------------------------------------------------------------------------------------------------------
     # addToDB takes a UserData and a pyrebase db and mutates the database in order to add UserData to the db.
     # addToDB: UserData Pyrebase -> None
     # Effects: Pyrebase is mutated to include self
@@ -98,7 +117,8 @@ class UserData:
         def deleteFromDB(self, db):
 
         """
-
+    # ------------------------------------------------------------------------------------------------------------------
+    # End of Database Operations
 if __name__ == "__main__":
     #Tests
     # get api keys securely
