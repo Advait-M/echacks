@@ -3,6 +3,7 @@ config = {}
 with open("config.py") as f:
     code = compile(f.read(), "config.py", 'exec')
     exec(code, config)
+f.close()
 class UserData:
     def __init__(self):
         self.opinionString = ""
