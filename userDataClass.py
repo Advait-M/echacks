@@ -3,7 +3,6 @@ import warnings
 import pyredb as pydb
 import Backend as twitData
 
-
 class UserData:
     """
     Fields:
@@ -101,7 +100,7 @@ class UserData:
     # Effects: Pyrebase is mutated to include self
     def addToDB(self):
         firedb.addUser(self.twitterHandle, self.realName, self.askInfo("mood", "dictionary"),
-                     self.askInfo("party", "dictionary"))
+                    self.askInfo("party", "dictionary"))
 
     # compareWithParty takes a UserData and a pyrebase db and returns a string that discusses how that user's emotions
     #   correspond with the average emotion of their political party.
@@ -111,6 +110,7 @@ class UserData:
         emotionsList = ["anger", "joy", "sadness", "surprise", "fear"]
         partiesList = ["Green", "Liberal", "Conservative", "Libertarian"]
         emotionsOfUserParty = [0, 0, 0, 0, 0]
+        partyCount = 0
 
         for i in usersList:
             tempParty = [i["Green"],i["Liberal"],i["Conservative"],i["Libertarian"]]
@@ -119,6 +119,7 @@ class UserData:
                 tempEmotion = [i["anger"], i["joy"], i["sadness"], i["surprise"], i["fear"]]
                 probableEmotion = emotionsList.index(max(tempEmotion))
                 emotionsOfUserParty[probableEmotion] += 1
+                partyCount += 1
 
         partyEmotion = emotionsList[emotionsOfUserParty.index(max(emotionsOfUserParty))]
 
