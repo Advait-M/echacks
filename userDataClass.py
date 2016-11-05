@@ -149,7 +149,7 @@ if __name__ == "__main__":
     firedb = pydb.LogiticaPolitica()
     basicTest1 = UserData()
     # print(basicTest1)
-    userHandle = "POTUS"
+    userHandle = "ethguo"
     basicTest1.updateHandle(userHandle)
     # basicTest1.updateOpinion("I have an opinion")
     # print(basicTest1)
