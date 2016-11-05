@@ -11,9 +11,10 @@ def getTweets(handle):
     # print(results)
     # print()
     statii = []
-    # print(results)
-    # print(results[0])
+    print(results)
+    print(results[0])
     uName = results[0]["user"]["name"]
+    print(uName)
     for status in results:
         statii.append(status["text"])
     # print(statii)
@@ -23,6 +24,56 @@ def getTweets(handle):
         textS = textS[0:i] + textS[i+1:]
 
     print(textS)
+    print([uName, textS])
     return [uName, textS]
 if __name__ == "__main__":
+    politicallyActiveHandles = [
+        "RepublicanStudy",
+        "benpolitico",
+        "daveweigel",
+        "fixfelicia",
+        "pwire",
+        "susanpage",
+        "alex_wags",
+        "HotlineReid",
+        "PElliottAP",
+        "bethreinhard",
+        "thegarance",
+        "mikememoli",
+        "ErinMcPike",
+        "markknoller",
+        "SuzyKhimm",
+        "jaketapper",
+        "nprpolitics",
+        "McClatchyDC",
+        "SwingState",
+        "Wonkette",
+        "GOP12",
+        "LizMair",
+        "LarrySabato",
+        "Dave_Wasserman",
+        "anamariecox",
+        "samgf",
+        "donnabrazile",
+        "chucktodd",
+        "cbellantoni",
+        "Atrios",
+        "nicopitney",
+        "ggreenwald",
+        "wonkroom",
+        "stevebenen",
+        "AlanColmes",
+        "ewerickson",
+        "mindyfinn",
+        "dmataconis",
+        "TPCarney",
+        "jbarro",
+        "Heminator",
+        "reihansalam",
+        "nathandaschle",
+        "fivethirtyeight",
+        "ppppolls",
+        "MysteryPollster",
+        "RasmussenPoll"]
+
     getTweets("POTUS")

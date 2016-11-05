@@ -28,6 +28,7 @@ class UserData:
                self.opinionString + "\nParty: " + self.politicalParty + "\nMood: " + self.mood
 
     # Parameter updaters
+
     # ------------------------------------------------------------------------------------------------------------------
     # updateRealName takes self and a string called inName and mutates self to make the user's
     #   real name be the inputted string.
@@ -136,17 +137,18 @@ class UserData:
 
         return error
 
+    # interpretError takes a float point value and returns a string telling the user about their level of difference in
+    #   emotion between them and their party in aggregate.
+    # interpretError: Float -> Str
+    """
+    def interpretError(floatIn):
 
-        """
-    # deleteFromDB takes a UserData and a pyrebase db and mutates db to remove UserData from it.
-    # deleteFromDB: UserData Pyrebase -> None
-    # Effects: Mutates db so that UserData is removed.
-    def deleteFromDB(self):
-
-        """
-
+    """
     # ------------------------------------------------------------------------------------------------------------------
     # End of Database Operations
+
+
+
 if __name__ == "__main__":
     #Tests
     # get api keys securely
@@ -156,6 +158,7 @@ if __name__ == "__main__":
         exec(code, config)
     f.close()
     firedb = pydb.LogiticaPolitica()
+    """
     basicTest1 = UserData()
     # print(basicTest1)
     userHandle = "ethguo"
@@ -177,3 +180,67 @@ if __name__ == "__main__":
     basicTest1.addToDB()
 
     print(basicTest1.compareWithParty())
+    """
+
+    #Populate the database
+    # CHANGE THIS TO ONE WHEN THE DB IS POPULATED
+    on = 0
+    politicallyActiveHandles = [
+        "RepublicanStudy",
+        "benpolitico",
+        "daveweigel",
+        "fixfelicia",
+        "pwire",
+        "susanpage",
+        "alex_wags",
+        "HotlineReid",
+        "PElliottAP",
+        "bethreinhard",
+        "thegarance",
+        "mikememoli",
+        "ErinMcPike",
+        "markknoller",
+        "SuzyKhimm",
+        "jaketapper",
+        "nprpolitics",
+        "McClatchyDC",
+        "SwingState",
+        "Wonkette",
+        "GOP12",
+        "LizMair",
+        "LarrySabato",
+        "Dave_Wasserman",
+        "anamariecox",
+        "samgf",
+        "donnabrazile",
+        "chucktodd",
+        "cbellantoni",
+        "Atrios",
+        "nicopitney",
+        "ggreenwald",
+        "wonkroom",
+        "stevebenen",
+        "AlanColmes",
+        "ewerickson",
+        "mindyfinn",
+        "dmataconis",
+        "TPCarney",
+        "jbarro",
+        "Heminator",
+        "reihansalam",
+        "nathandaschle",
+        "fivethirtyeight",
+        "ppppolls",
+        "MysteryPollster",
+        "RasmussenPoll"]
+
+    if on == 0:
+        for i in politicallyActiveHandles:
+            newUser = UserData()
+            tweets = twitData.getTweets(i)
+            newUser.updateHandle(i)
+            newUser.updateRealName(tweets[0])
+            newUser.updateOpinion(twitData.getTweets(i)[1])
+            newUser.updateMood(newUser.askInfo("mood", "string"))
+            newUser.updateParty(newUser.askInfo("party", "string"))
+            newUser.addToDB()
