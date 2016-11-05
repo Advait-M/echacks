@@ -3,7 +3,7 @@
 from pyrebase import *
 import config as cf
 
-class WaitNoMore:
+class LogiticaPolitica:
     def __init__(self):
         self.config = cf.firebaseStuff
         self.firebase = initialize_app(self.config)
@@ -22,8 +22,11 @@ class WaitNoMore:
         if event == "put":
             print(key, ":", value)
 
+    def addUser(self, handle, uName, moods, parties):
+        dataDict = dict(moods, **parties)
+        dataDict["name"] = uName
+        self.db.child(handle).set(dataDict)
 
 if __name__ == "__main__":
-    test = WaitNoMore()
+    test = LogiticaPolitica()
     test.start()
-    print("a")
