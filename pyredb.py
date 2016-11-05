@@ -27,6 +27,27 @@ class LogiticaPolitica:
         dataDict["name"] = uName
         self.db.child(handle).set(dataDict)
 
+    def getAll(self):
+        all_users = self.db.child("/").get()
+        masterList = []
+        for user in all_users.each():
+            mDict = {}
+            mDict["handle"] = user.key()
+            mDict["Conservative"] = (user.val())["Conservative"]
+            mDict["Green"] = (user.val())["Green"]
+            mDict["Liberal"] = (user.val())["Liberal"]
+            mDict["Libertarian"] = (user.val())["Libertarian"]
+            mDict["fear"] = (user.val())["fear"]
+            mDict["joy"] = (user.val())["joy"]
+            mDict["surprise"] = (user.val())["surprise"]
+            mDict["anger"] = (user.val())["anger"]
+            mDict["sadness"] = (user.val())["sadness"]
+            mDict["name"] = (user.val())["name"]
+            masterList.append(mDict)
+        print(masterList)
+        return masterList
+
 if __name__ == "__main__":
     test = LogiticaPolitica()
     test.start()
+    test.getAll()

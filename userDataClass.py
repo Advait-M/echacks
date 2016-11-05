@@ -99,7 +99,7 @@ class UserData:
     # addToDB: UserData Pyrebase -> None
     # Effects: Pyrebase is mutated to include self
     def addToDB(self):
-        pydb.addUser(self.twitterHandle, self.realName, self.askInfo("mood", "dictionary"),\
+        firedb.addUser(self.twitterHandle, self.realName, self.askInfo("mood", "dictionary"),
                      self.askInfo("party", "dictionary"))
 
         """
@@ -117,6 +117,7 @@ class UserData:
         def deleteFromDB(self, db):
 
         """
+
     # ------------------------------------------------------------------------------------------------------------------
     # End of Database Operations
 if __name__ == "__main__":
@@ -127,15 +128,17 @@ if __name__ == "__main__":
         code = compile(f.read(), "config.py", 'exec')
         exec(code, config)
     f.close()
-
+    firedb = pydb.LogiticaPolitica()
     basicTest1 = UserData()
     print(basicTest1)
-    basicTest1.updateOpinion("I have an opinion")
-    print(basicTest1)
-    basicTest1.updateOpinion("about stuff")
+    # basicTest1.updateOpinion("I have an opinion")
+    # print(basicTest1)
+    basicTest1.updateOpinion("I feel sad and disappointed by life.")
     print(basicTest1)
     basicTest1.updateMood(basicTest1.askInfo("mood", "string"))
     print(basicTest1)
     basicTest1.updateParty(basicTest1.askInfo("party", "string"))
     print(basicTest1)
+    basicTest1.updateHandle("POTUS")
 
+    basicTest1.addToDB()
