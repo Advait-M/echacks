@@ -1,9 +1,13 @@
 import indicoio
+import warnings
+
+# get api keys securely
 config = {}
 with open("config.py") as f:
     code = compile(f.read(), "config.py", 'exec')
     exec(code, config)
 f.close()
+
 class UserData:
     def __init__(self):
         self.opinionString = ""
@@ -52,9 +56,31 @@ class UserData:
                 if tempDict[i] == maxVal:
                     return i
         else:
-            raise Exception
+            warnings.warn("invalid request", UserWarning)
 
+        """
+        # addToDB takes a UserData and a pyrebase db and mutates the database in order to add UserData to the db.
+        # addToDB: UserData Pyrebase -> None
+        # Effects: Pyrebase is mutated to include self
+        def addToDB(self, db):
 
+        """
+
+        """
+        # compareWithParty takes a UserData and a pyrebase db and returns a string that discusses how that user's emotions
+        #   correspond with the average emotion of their political party.
+        # compareWithParty: UserData Pyrebase -> Str
+        def compareWithParty(self, db):
+
+        """
+
+        """
+        # deleteFromDB takes a UserData and a pyrebase db and mutates db to remove UserData from it.
+        # deleteFromDB: UserData Pyrebase -> None
+        # Effects: Mutates db so that UserData is removed.
+        def deleteFromDB(self, db):
+
+        """
 
 #Tests
 basicTest1 = UserData()
@@ -67,3 +93,6 @@ basicTest1.updateMood(basicTest1.askInfo("mood"))
 print(basicTest1)
 basicTest1.updateParty(basicTest1.askInfo("party"))
 print(basicTest1)
+
+
+
