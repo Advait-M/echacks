@@ -115,8 +115,8 @@ if __name__ == "__main__":
     print(basicTest1)
     basicTest1.updateOpinion("about stuff")
     print(basicTest1)
-    basicTest1.updateMood(basicTest1.askInfo("mood"))
+    basicTest1.updateMood(basicTest1.askInfo("mood", "string"))
     print(basicTest1)
-    basicTest1.updateParty(basicTest1.askInfo("party"))
+    basicTest1.updateParty(basicTest1.askInfo("party", "string"))
     print(basicTest1)
 
