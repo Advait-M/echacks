@@ -142,6 +142,21 @@ class UserData:
     # interpretError: Float -> Str
     """
     def interpretError(floatIn):
+        borders = [10, 30, 50, 70, 90, 1000000]
+        textAssociation = [
+            "Your tweeted emotion matches highly with your tweeted political party: ",
+            "Your tweeted emotion is fairly matched up with your tweeted political party: ",
+            "Your tweeted emotion is moderately matched with your tweeted political party: ",
+            "Your tweeted emotion is less than moderately well associated with your tweeted political party",
+            "Your tweeted emotion poorly matches with your tweeted political party: ",
+            "It is highly unlikely that your tweeted emotion matches that of the others in your political party given the data."
+        ]
+        for i in range(0, len(borders)):
+            if floatIn < borders[i]:
+                return textAssociation[i]
+            else:
+                pass
+
 
     """
     # ------------------------------------------------------------------------------------------------------------------
