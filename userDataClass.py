@@ -32,13 +32,13 @@ def UserData():
     def updateMood(self, inMood):
         self.mood = inMood
 
-    # askPart takes a UserData and a string called request and returns a string corresponding to
+    # askInfo takes a UserData and a string called request and returns a string corresponding to
     #   the appropriate data given self.opinionString and request.
-    # askParty: UserData Str -> Str
+    # askInfo: UserData Str -> Str
     # Requires: Request is anyof(mood, party)
-    def askParty(self, request):
+    def askInfo(self, request):
         if request == "mood":
-            indicoio.sentiment(self.opinionString, api_key=key)
+            indicoio.emotion(self.opinionString, api_key=key)
         elif request == "party":
             indicoio.political(self.opinionString, api_key=key)
         else:
