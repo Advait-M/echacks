@@ -14,6 +14,19 @@ class UserData:
         return "Real Name: " + self.realName + "\nTwitter Handle: "+ self.twitterHandle + "\nOpinion: " + \
                self.opinionString +"\nParty: "+self.politicalParty+"\nMood: "+self.mood
 
+    # updateRealName takes self and a string called inName and mutates self to make the user's
+    #   real name be the inputted string.
+    # updateRealName: UserData Str -> None
+    # Effects: self is mutated
+    def updateRealName(self, inName):
+        self.realName = inName
+
+    # updateHandle takes self and a string called inHandle and mutates self to make the user's
+    #   twitter handle be the inputted string.
+    # updateRealName: UserData Str -> None
+    # Effects: self is mutated
+    def updateHandle(self, inHandle):
+        self.twitterHandle = inHandle
 
     # updateOpinion takes self and a string called opiString and mutates self so that
     #   the string that is sent to indico is updated with the latest tweet
