@@ -184,7 +184,7 @@ if __name__ == "__main__":
 
     #Populate the database
     # CHANGE THIS TO ONE WHEN THE DB IS POPULATED
-    on = 0
+    on = 1
     politicallyActiveHandles = [
         "RepublicanStudy",
         "benpolitico",
@@ -238,9 +238,12 @@ if __name__ == "__main__":
         for i in politicallyActiveHandles:
             newUser = UserData()
             tweets = twitData.getTweets(i)
-            newUser.updateHandle(i)
-            newUser.updateRealName(tweets[0])
-            newUser.updateOpinion(twitData.getTweets(i)[1])
-            newUser.updateMood(newUser.askInfo("mood", "string"))
-            newUser.updateParty(newUser.askInfo("party", "string"))
-            newUser.addToDB()
+            if tweets == []:
+                pass
+            else:
+                newUser.updateHandle(i)
+                newUser.updateRealName(tweets[0])
+                newUser.updateOpinion(twitData.getTweets(i)[1])
+                newUser.updateMood(newUser.askInfo("mood", "string"))
+                newUser.updateParty(newUser.askInfo("party", "string"))
+                newUser.addToDB()
